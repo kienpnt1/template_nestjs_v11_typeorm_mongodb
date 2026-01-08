@@ -1,0 +1,67 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@commons/*": [
+        "src/commons/*"
+      ],
+      "@configs/*": [
+        "src/configs/*"
+      ],
+      "@core/*": [
+        "src/core/*"
+      ],
+      "@databases/*": [
+        "src/databases/*"
+      ],
+      "@decorators/*": [
+        "src/decorators/*"
+      ],
+      "@guards/*": [
+        "src/guards/*"
+      ],
+      "@helpers/*": [
+        "src/helpers/*"
+      ],
+      "@interceptors/*": [
+        "src/interceptors/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@modules-admin/*": [
+        "src/modules-admin/*"
+      ],
+      "@modules-guest/*": [
+        "src/modules-guest/*"
+      ],
+      "@modules-open/*": [
+        "src/modules-open/*"
+      ],
+      "@strategies/*": [
+        "src/strategies/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/legacy"
+  ]
+}

@@ -1,0 +1,32 @@
+name: Build Docker Image (UAT)
+
+on:
+  push:
+    branches:
+      - develop # Tự động chạy khi có thay đổi trên nhánh `develop`
+
+jobs:
+  build-uat:
+    runs-on: [cicd-splus] # Chạy trên runner self-hosted `cicd-splus`
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Registry
+        env:
+          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "${DOCKER_PASSWORD}" | docker login "${DOCKER_REGISTRY}" -u "${DOCKER_USER}" --password-stdin
+
+      - name: Build and Push Docker Image
+        env:
+          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+          IMAGE_NAME: splus-uat/cxm-service
+          DOCKERFILE_PATH: ./.docker/develop.dockerfile
+        run: |
+          docker build -t "${IMAGE_NAME}:latest" -f "${DOCKERFILE_PATH}" .
+          docker tag "${IMAGE_NAME}:latest" "${DOCKER_REGISTRY}/${IMAGE_NAME}:latest"
+          docker push "${DOCKER_REGISTRY}/${IMAGE_NAME}:latest"
